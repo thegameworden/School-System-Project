@@ -26,7 +26,7 @@ public class School {
         courses.add(course);
     }
 
-    public ArrayList<Course> getCoursese() {
+    public ArrayList<Course> getCourses() {
         return courses;
     }
 
