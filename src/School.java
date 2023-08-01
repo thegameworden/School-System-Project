@@ -10,24 +10,36 @@ public class School {
         this.courses = courses;
     }
 
-    public void addStudent(String firstName, String lastName, String email) {
-        Student student = new Student(accounts.size() + 1, firstName, lastName, email);
+    public Student addStudent(String firstName, String lastName, String email) {
+        Student student = new Student(accounts.size(), firstName, lastName, email);
         accounts.add(student);
+        return student;
     }
 
-    public void addTeacher(String firstName, String lastName, String email) {
-        Teacher teacher = new Teacher(accounts.size() + 1, firstName, lastName, email);
+    public Teacher addTeacher(String firstName, String lastName, String email) {
+        Teacher teacher = new Teacher(accounts.size(), firstName, lastName, email);
         accounts.add(teacher);
+        return teacher;
 
     }
 
-    public void addCourse(String id) {
+    public Course addCourse(String id) {
         Course course = new Course(id);
         courses.add(course);
+        return course;
     }
 
     public ArrayList<Course> getCourses() {
         return courses;
+    }
+
+    public Course getCourse(String id) {
+        for (int i = 0; i < courses.size(); i++) {
+            if (courses.get(i).getId().equals(id)) {
+                return courses.get(i);
+            }
+        }
+        return null;
     }
 
     public ArrayList<Account> geAccounts() {
@@ -52,6 +64,18 @@ public class School {
             }
         }
         return ret;
+    }
+
+    public Student getStudent(int id) {
+        if (id < 0 || id >= accounts.size() || !(accounts.get(id) instanceof Student))
+            return null;
+        return (Student) accounts.get(id);
+    }
+
+    public Teacher getTeacher(int id) {
+        if (id < 0 || id >= accounts.size() || !(accounts.get(id) instanceof Teacher))
+            return null;
+        return (Teacher) accounts.get(id);
     }
 
 }

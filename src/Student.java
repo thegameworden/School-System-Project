@@ -9,10 +9,6 @@ public class Student extends Account {
     }
 
     public ArrayList<String> getCoursesTaking() {
-        System.out.println(this.getFirstName() + " is taking:");
-        for (String course : coursesTaking) {
-            System.out.println(course);
-        }
         return coursesTaking;
     }
 

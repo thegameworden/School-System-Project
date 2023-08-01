@@ -30,12 +30,21 @@ public class Course {
         student.addCourse(this.id);
     }
 
+    public void setStudentGrade(int id, int grade) {
+        for (Map.Entry<Student, Integer> student : studentGrade.entrySet()) {
+            if (student.getKey().getId() == id) {
+                studentGrade.put(student.getKey(), grade);
+                return;
+            }
+        }
+
+    }
+
     public String getStudentGrade(Student student) {
         if (!studentGrade.containsKey(student)) {
             return "Student not found in this class";
         }
-        String ret = student.getFirstName() + " " + student.getLastName() + "\'s grade is: "
-                + studentGrade.get(student);
+        String ret = "" + studentGrade.get(student);
         return ret;
     }
 
