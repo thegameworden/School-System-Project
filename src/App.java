@@ -15,6 +15,7 @@ public class App {
     }
 
     public static void displayMainMenu() {
+        clearConsole();
         System.out.println("\n\nMain Menu:(Enter the corresponding number for menu selection)\n" +
                 "1. Courses\n" +
                 "2. Accounts\n" +
@@ -23,11 +24,11 @@ public class App {
 
         switch (input) {
             case "1":
-                System.out.println("Courses Menu:");
+                System.out.println("\nCourses Menu:");
                 displayCoursesMenu();
                 break;
             case "2":
-                System.out.println("Accounts Menu:");
+                System.out.println("\nAccounts Menu:");
                 displayAccountsMenu();
                 break;
             case "3":
@@ -41,17 +42,17 @@ public class App {
     }
 
     public static void displayCoursesMenu() {
-        System.out.println("1. View all courses");
+        System.out.println("\n1. View all courses");
         System.out.println("2. Add Courses");
         System.out.println("3. Add student to course");
         System.out.println("4. Get grade report for a course");
         System.out.println("5. Set a Student Grade");
-        System.out.println("6. Exit to Main Menu");
+        System.out.println("6. Exit to Main Menu\n");
         String input = scanner.nextLine();
 
         switch (input) {
             case "1":
-                System.out.println("View all courses:");
+                System.out.println("\nView all courses:");
                 ArrayList<Course> availableCourses = SMU.getCourses();
                 System.out.println("Courses currently offered: ");
                 for (int i = 0; i < availableCourses.size(); i++) {
@@ -60,21 +61,21 @@ public class App {
                 System.out.println("End of course list.\n");
                 break;
             case "2":
-                System.out.println("Add Courses:");
+                System.out.println("\nAdd Courses:");
                 createCourse();
                 break;
             case "3":
-                System.out.println("Add student to course:");
+                System.out.println("\nAdd student to course:");
                 addStudentToCourse();
                 break;
             case "4":
-                System.out.println("Getting grades for a course");
+                System.out.println("\nGetting grades for a course");
                 System.out.println("Please Enter the course id: ");
                 String courseIDInput = scanner.nextLine();
                 getGradesForCourse(courseIDInput);
                 break;
             case "5":
-                System.out.println("Setting a student's grade");
+                System.out.println("\nSetting a student's grade");
                 setStudentGradeForCourse();
                 break;
             case "6":
@@ -89,23 +90,23 @@ public class App {
     }
 
     public static void displayAccountsMenu() {
-        System.out.println("1. Teachers");
+        System.out.println("\n1. Teachers");
         System.out.println("2. Students");
         System.out.println("3. Display all accounts");
-        System.out.println("4. Exit to Main Menu");
+        System.out.println("4. Exit to Main Menu\n");
         String input = scanner.nextLine();
 
         switch (input) {
             case "1":
-                System.out.println("Teachers Menu:");
+                System.out.println("\nTeachers Menu:");
                 displayTeachersMenu();
                 break;
             case "2":
-                System.out.println("Students Menu:");
+                System.out.println("\nStudents Menu:");
                 displayStudentsMenu();
                 break;
             case "3":
-                System.out.println("Displaying all accounts: ");
+                System.out.println("\nDisplaying all accounts: ");
                 printAllAccounts();
                 break;
             case "4":
@@ -120,16 +121,16 @@ public class App {
     }
 
     public static void displayTeachersMenu() {
-        System.out.println("1. View Teachers");
+        System.out.println("\n1. View Teachers");
         System.out.println("2. Add Teacher");
         System.out.println("3. Add course to teacher's schedule");
         System.out.println("4. View a teacher's schedule");
-        System.out.println("5. Exit to Accounts Menu");
+        System.out.println("5. Exit to Accounts Menu\n");
         String input = scanner.nextLine();
 
         switch (input) {
             case "1":
-                System.out.println("View all teachers:");
+                System.out.println("\nView all teachers:");
                 ArrayList<Teacher> teachers = SMU.getTeachers();
                 for (Teacher teacher : teachers) {
                     System.out.println(
@@ -139,15 +140,15 @@ public class App {
                 System.out.println("End of list.\n");
                 break;
             case "2":
-                System.out.println("Add Teacher:");
+                System.out.println("\nAdd Teacher:");
                 createTeacher();
                 break;
             case "3":
-                System.out.println("Adding course to teacher's schedule");
+                System.out.println("\nAdding course to teacher's schedule");
                 addCoursetoSchedule();
                 break;
             case "4":
-                System.out.println("View a teacher's schedule");
+                System.out.println("\nView a teacher's schedule");
                 getTeacherSchedule();
                 System.out.println("End of schedule");
 
@@ -164,16 +165,16 @@ public class App {
     }
 
     public static void displayStudentsMenu() {
-        System.out.println("1. View all students");
+        System.out.println("\n1. View all students");
         System.out.println("2. Add Student");
         System.out.println("3. Register student to class");
         System.out.println("4. View a student's grade report");
-        System.out.println("5. Exit to Accounts Menu");
+        System.out.println("5. Exit to Accounts Menu\n");
         String input = scanner.nextLine();
 
         switch (input) {
             case "1":
-                System.out.println("View all students:");
+                System.out.println("\nView all students:");
                 ArrayList<Student> students = SMU.getStudents();
                 for (Student student : students) {
                     System.out.println(
@@ -183,7 +184,7 @@ public class App {
                 System.out.println("End of list.\n");
                 break;
             case "2":
-                System.out.println("Add Student:");
+                System.out.println("\nAdd Student:");
                 createStudent();
                 break;
 
@@ -191,7 +192,7 @@ public class App {
                 addStudentToCourse();
                 break;
             case "4":
-                System.out.println("Getting grade report");
+                System.out.println("\nGetting grade report");
                 getGradeReport();
                 System.out.println("End of grade report\n");
                 break;
@@ -251,21 +252,27 @@ public class App {
     }
 
     public static void setStudentGradeForCourse() {
-        System.out.println("Please enter the course id:");
+        System.out.println("\nPlease enter the course id:");
         String courseID = scanner.nextLine();
-        if (SMU.getCourse(courseID) == null) {
+        Course course = SMU.getCourse(courseID);
+        if (course == null) {
             System.err.println("This course does not exist.");
             return;
         }
-        System.out.println("Please enter the student id:");
+        System.out.println("\nPlease enter the student id:");
         int userID = Integer.parseInt(scanner.nextLine());
-        if (SMU.getStudent(userID) == null) {
+        Student student = SMU.getStudent(userID);
+        if (student == null) {
             System.err.println("This student does not exist");
+            return;
         }
-        System.out.println("Please enter the grade (0-100):");
-        int grade = Integer.parseInt(scanner.nextLine());
+        if (!course.hasStudent(student)) {
+            System.out.println("This student is not registered for this course");
+            return;
+        }
 
-        Course course = SMU.getCourse(courseID);
+        System.out.println("\nPlease enter the grade (0-100):");
+        int grade = Integer.parseInt(scanner.nextLine());
         course.setStudentGrade(userID, grade);
     }
 
@@ -332,7 +339,7 @@ public class App {
     }
 
     private static void addStudentToCourse() {
-        System.out.println("Please input the student's id: ");
+        System.out.println("\nPlease input the student's id: ");
         int studentID = Integer.parseInt(scanner.nextLine());
         Student adderStudent = SMU.getStudent(studentID);
 
@@ -377,4 +384,10 @@ public class App {
         SMU.addCourse("ENG400");
         SMU.addCourse("CSC598");
     }
+
+    public static void clearConsole() {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+    }
+
 }

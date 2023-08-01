@@ -39,6 +39,9 @@ public class Course {
         }
 
     }
+    public boolean hasStudent(Student student){
+        return studentGrade.containsKey(student);
+    }
 
     public String getStudentGrade(Student student) {
         if (!studentGrade.containsKey(student)) {
